@@ -24,10 +24,14 @@
       margin-bottom: 1rem;
       padding: 1rem 2rem;
       border-radius: 0.4rem;
+      &.selected{
+        background: rgb(42, 154, 168); 
+      }
       &:hover {
         background: black;
         color: white;
       }
+      
     }
   }
   .Button {
