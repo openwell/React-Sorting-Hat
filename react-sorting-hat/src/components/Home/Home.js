@@ -1,10 +1,10 @@
 import React, { Component } from "react";
-import "./Home.scss";
+import classes from "./Home.module.scss";
 
 export class questions extends Component {
   render() {
     return (
-      <div className="Home_Container">
+      <div className={classes.Home_Container}>
         <header>
           <h1>Welcome to Hogwarts School of Witchcraft and Wizardry</h1>
         </header>
