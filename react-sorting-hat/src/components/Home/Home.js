@@ -1,20 +1,20 @@
-import React, { Component } from "react";
+import React from "react";
 import classes from "./Home.module.scss";
+import hogwartLogo from "../../resources/images/hogwart_logo.png";
 
-export class questions extends Component {
-  render() {
-    return (
-      <div className={classes.Home_Container}>
-        <header>
-          <h1>Welcome to Hogwarts School of Witchcraft and Wizardry</h1>
-        </header>
-        <div>
-          <button>Click To Enter</button>
-        </div>
+const questions = props => {
+  return (
+    <div className={classes.Home_Container} hidden={props.display}>
+      <header>
+        <h1>Welcome to Hogwarts School of Witchcraft and Wizardry</h1>
+        <img src={hogwartLogo} alt="" />
+      </header>
+      <div>
+        <button onClick={props.click}>Click To Enter</button>
       </div>
-    );
-  }
-}
+    </div>
+  );
+};
 
 export default questions;
 // Gryffindor  strong, bravery and leadership  loyal, courageous daring, nerve, and chivalry
