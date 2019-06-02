@@ -48,12 +48,18 @@
       &:hover {
         background: rgba(0, 0, 255, 0.493);
       }
+      &:disabled{
+          cursor: not-allowed;
+      }
       &:nth-child(2) {
         color: white;
         background: green;
         &:hover {
           background: rgba(0, 128, 0, 0.493);
         }
+      }
+      &:nth-child(3) {
+        background: rgb(50, 53, 50);
       }
     }
   }

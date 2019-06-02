@@ -2,11 +2,14 @@ import React, { Component } from "react";
 import "./App.scss";
 import Home from "./components/Home/Home";
 import Questions from "./components/Questions/Questions";
+import Score from './components/Questions/Score/Score'
 
 class App extends Component {
   state = {
     home: false,
     question: true,
+    score: true,
+    house: '',
     questions: [
       {
         ques: "Newt Scamander belonged to what house in Hogwart",
@@ -75,7 +78,13 @@ class App extends Component {
       }));
     }
   };
+  submitQuestionsHandler=()=>{
+    this.setState({
+      question: true, score: false
+    })
+  }
   render() {
+    const submitDisplay = (this.state.currentQuestionNumber + 1) === this.state.totalQuestion;
     return (
       <div className="App">
         <Home click={this.homeScreenHandler} display={this.state.home} />
@@ -85,7 +94,10 @@ class App extends Component {
           next={this.questionsHandler}
           no={this.state.currentQuestionNumber + 1}
           answer={this.answerCheckerHandler}
+          submitButton={submitDisplay}
+          submit={this.submitQuestionsHandler}
         />
+        <Score display={this.state.score} house={this.state.house}/>
       </div>
     );
   }
