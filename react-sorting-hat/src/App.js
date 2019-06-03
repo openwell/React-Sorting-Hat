@@ -1,18 +1,103 @@
-import React, { Component } from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, { Component } from "react";
+import "./App.scss";
+import Home from "./components/Home/Home";
+import Questions from "./components/Questions/Questions";
+import Score from './components/Questions/Score/Score'
 
 class App extends Component {
+  state = {
+    home: false,
+    question: true,
+    score: true,
+    house: '',
+    questions: [
+      {
+        ques: "Newt Scamander belonged to what house in Hogwart",
+        ans: ["Hufflepuff", "Gryffindor", "Ravenclaw", "Slytherin"],
+        selected: "",
+        correct: "Gryffindor"
+      },
+      {
+        ques: "Slytherin Emblematic is ?",
+        ans: ["Serpent", "Lion", "Eagle", "Badger"],
+        selected: "",
+        correct: "Serpent"
+      },
+      {
+        ques: "Is the sorting hat song different every year",
+        ans: ["No", "Yes"],
+        selected: "",
+        correct: "Yes"
+      }
+    ],
+    currentQuestionNumber: 0,
+    noOfCorrectAnswer: 0,
+    totalQuestion: 0
+  };
+  componentDidMount() {
+    this.setState({ totalQuestion: this.state.questions.length });
+  }
+  answerCheckerHandler = elem => {
+    const updateState = [...this.state.questions];
+    let tempState = updateState[this.state.currentQuestionNumber];
+    if (elem === tempState.correct && elem !== tempState.selected) {
+      this.setState(prevState => ({
+        noOfCorrectAnswer: prevState.noOfCorrectAnswer + 1
+      }));
+    }
+    if (
+      elem !== tempState.correct &&
+      tempState.correct === tempState.selected
+    ) {
+      this.setState(prevState => ({
+        noOfCorrectAnswer: prevState.noOfCorrectAnswer - 1
+      }));
+    }
+    tempState.selected = elem;
+    this.setState({ questions: updateState });
+  };
+  homeScreenHandler = () => {
+    this.setState(prevState => ({
+      home: !prevState.home,
+      question: !prevState.question
+    }));
+  };
+
+  questionsHandler = data => {
+    if (
+      data === "next" &&
+      this.state.currentQuestionNumber + 1 < this.state.totalQuestion
+    ) {
+      this.setState(prevState => ({
+        currentQuestionNumber: prevState.currentQuestionNumber + 1
+      }));
+    }
+    if (data === "prev" && this.state.currentQuestionNumber + 1 > 1) {
+      this.setState(prevState => ({
+        currentQuestionNumber: prevState.currentQuestionNumber - 1
+      }));
+    }
+  };
+  submitQuestionsHandler=()=>{
+    this.setState({
+      question: true, score: false
+    })
+  }
   render() {
+    const submitDisplay = (this.state.currentQuestionNumber + 1) === this.state.totalQuestion;
     return (
       <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <h1 className="App-title">Welcome to React</h1>
-        </header>
-        <p className="App-intro">
-          To get started, edit <code>src/App.js</code> and save to reload.
-        </p>
+        <Home click={this.homeScreenHandler} display={this.state.home} />
+        <Questions
+          display={this.state.question}
+          questions={this.state.questions[this.state.currentQuestionNumber]}
+          next={this.questionsHandler}
+          no={this.state.currentQuestionNumber + 1}
+          answer={this.answerCheckerHandler}
+          submitButton={submitDisplay}
+          submit={this.submitQuestionsHandler}
+        />
+        <Score display={this.state.score} house={this.state.house}/>
       </div>
     );
   }

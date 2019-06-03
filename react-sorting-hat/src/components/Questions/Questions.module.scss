@@ -1,0 +1,66 @@
+.Questions {
+  max-width: 80rem;
+  margin: 0 auto;
+  margin-top: 5rem;
+  small {
+    padding: 1rem;
+    
+  }
+  h1 {
+    background: white;
+    padding: 1rem;
+    border-radius: 0.3rem;
+    border: 1px solid black;
+    margin-bottom: 3rem;
+    font-size: 3rem;
+  }
+  .Answers {
+    background: white;
+    max-width: 50rem;
+    margin: 0 auto;
+
+    p {
+      border: 1px solid black;
+      margin-bottom: 1rem;
+      padding: 1rem 2rem;
+      border-radius: 0.4rem;
+      &.selected{
+        background: rgb(42, 154, 168); 
+      }
+      &:hover {
+        background: black;
+        color: white;
+      }
+      
+    }
+  }
+  .Button {
+    display: flex;
+    justify-content: flex-end;
+    button {
+      padding: 1rem 2rem;
+      border-radius: 0.3rem;
+      margin-left: 1rem;
+      background: blue;
+      color: white;
+      cursor: pointer;
+      outline: none;
+      &:hover {
+        background: rgba(0, 0, 255, 0.493);
+      }
+      &:disabled{
+          cursor: not-allowed;
+      }
+      &:nth-child(2) {
+        color: white;
+        background: green;
+        &:hover {
+          background: rgba(0, 128, 0, 0.493);
+        }
+      }
+      &:nth-child(3) {
+        background: rgb(50, 53, 50);
+      }
+    }
+  }
+}
